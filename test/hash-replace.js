@@ -1,5 +1,58 @@
 const test = require('ava')
+const loaderUtils = require('loader-utils')
+const replace = require('..')
+const crypto = require('crypto')
 
-test('description', t => {
-  t.is(true, true)
+const md5 = string => {
+  const x = crypto.createHash('md5')
+  x.update(string)
+  return x.digest('hex')
+}
+
+;[
+[
+  // string
+  'file.[hash].js',
+  // name
+  'chunkhash',
+  // replacer
+  'abc',
+  'file.[hash].js'
+],
+[
+  'file.[hash].js',
+  'hash',
+  'abc',
+  'file.abc.js'
+],
+[
+  'file.[hash:7].js',
+  'hash',
+  'abcdefghijk',
+  'file.abcdefg.js'
+],
+[
+  'file.[hash:7].js',
+  'hash',
+  () => 'abc',
+  'file.abc.js'
+],
+[
+  'file.[md5:hash:hex].js',
+  'hash',
+  '1234567',
+  `file.${md5('1234567')}.js`
+],
+[
+  'file.[md5:hash:hex:7].js',
+  'hash',
+  '1234567',
+  `file.${md5('1234567').substr(0, 7)}.js`
+]
+
+].forEach(([string, name, replacer, e, buffer]) => {
+
+  test(`${string} | ${name}`, async t => {
+    t.is(replace(name)(string, replacer), e)
+  })
 })

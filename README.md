@@ -15,7 +15,7 @@
 
 # hash-replace
 
-<!-- description -->
+Substitute a webpack-style hash template string.
 
 ## Install
 
@@ -26,7 +26,28 @@ $ npm install hash-replace --save
 ## Usage
 
 ```js
-const hash_replace = require('hash-replace')
+import replace from 'hash-replace'
+
+replace('hash')('file.[hash:7].[chunkhash]', 'aGFzaC1yZXBsYWNl')
+// -> 'file.aGFzaC1.[chunkhash]'
+// only replace [hash], but not [chunkhash]
+```
+
+## replace(hashName)(string, replacer)
+
+- **hashName** `String` has following structure:
+
+```js
+'[hash]'
+'[hashName:length]'
+'[hashType:hashName:digestType]'
+'[hashType:hashName:digestType:length]'
+```
+
+- **replacer** `String|function(buffer, hashType, digestType, length)`
+
+```js
+const filename = replace('contenthash')('file.[contenthash:7].js', fileContent)
 ```
 
 ## License
