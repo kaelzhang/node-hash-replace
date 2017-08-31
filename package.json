@@ -1,6 +1,6 @@
 {
   "name": "hash-replace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Substitute a webpack-style hash template string. [hash:7]->abcdefg",
   "main": "lib/index.js",
   "scripts": {
@@ -52,10 +52,10 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
     "codecov": "^2.3.0",
-    "loader-utils": "^1.1.0",
     "nyc": "^11.1.0"
   },
   "dependencies": {
-    "babel-runtime": "^6.23.0"
+    "babel-runtime": "^6.23.0",
+    "loader-utils": "^1.1.0"
   }
 }
