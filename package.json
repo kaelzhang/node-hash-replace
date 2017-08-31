@@ -1,6 +1,6 @@
 {
   "name": "hash-replace",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Substitute a webpack-style hash template string. [hash:7]->abcdefg",
   "main": "lib/index.js",
   "scripts": {
@@ -20,7 +20,11 @@
     "hash-replace",
     "replace",
     "hash",
-    "webpack"
+    "webpack",
+    "digest",
+    "contenthash",
+    "chunkhash",
+    "hash"
   ],
   "engines": {
     "node": ">=4"

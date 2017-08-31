@@ -50,7 +50,9 @@ r('file.[hash:7].js', null, '1234567') // -> 'file.fcea920.js'
 - **replacer** `String=|function(match, hashType, digestType, length)=`
 
 ```js
-const filename = replace('contenthash')('file.[contenthash:7].js', fileContent)
+const r = replace('contenthash')
+const filename =
+  r('file.[contenthash:7].js', null, fileContent)
 ```
 
 - **content** `String=|Buffer=` If `replacer` is unset, it will try to digest the `content` to get the crypted hash.

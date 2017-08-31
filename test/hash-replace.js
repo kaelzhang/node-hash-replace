@@ -51,6 +51,12 @@ const md5 = string => {
   null,
   `file.${md5('1234567').substr(0, 7)}.js`,
   '1234567'
+],
+[
+  'file.[hash].js',
+  'hash',
+  null,
+  'file.[hash].js'
 ]
 
 ].forEach(([string, name, replacer, e, buffer]) => {
