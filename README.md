@@ -28,12 +28,15 @@ $ npm install hash-replace --save
 ```js
 import replace from 'hash-replace'
 
-replace('hash')('file.[hash:7].[chunkhash]', 'aGFzaC1yZXBsYWNl')
+const r = replace('hash')
+r('file.[hash:7].[chunkhash]', 'aGFzaC1yZXBsYWNl')
 // -> 'file.aGFzaC1.[chunkhash]'
 // only replace [hash], but not [chunkhash]
+
+r('file.[hash:7].js', null, '1234567') // -> 'file.fcea920.js'
 ```
 
-## replace(hashName)(string, replacer)
+## replace(hashName)(string, replacer, content)
 
 - **hashName** `String` has following structure:
 
@@ -44,11 +47,13 @@ replace('hash')('file.[hash:7].[chunkhash]', 'aGFzaC1yZXBsYWNl')
 '[hashType:hashName:digestType:length]'
 ```
 
-- **replacer** `String|function(buffer, hashType, digestType, length)`
+- **replacer** `String=|function(match, hashType, digestType, length)=`
 
 ```js
 const filename = replace('contenthash')('file.[contenthash:7].js', fileContent)
 ```
+
+- **content** `String=|Buffer=` If `replacer` is unset, it will try to digest the `content` to get the crypted hash.
 
 ## License
 

@@ -17,7 +17,8 @@ const md5 = string => {
   'chunkhash',
   // replacer
   'abc',
-  'file.[hash].js'
+  'file.[hash].js',
+  // buffer
 ],
 [
   'file.[hash].js',
@@ -40,19 +41,21 @@ const md5 = string => {
 [
   'file.[md5:hash:hex].js',
   'hash',
-  '1234567',
-  `file.${md5('1234567')}.js`
+  null,
+  `file.${md5('1234567')}.js`,
+  '1234567'
 ],
 [
   'file.[md5:hash:hex:7].js',
   'hash',
-  '1234567',
-  `file.${md5('1234567').substr(0, 7)}.js`
+  null,
+  `file.${md5('1234567').substr(0, 7)}.js`,
+  '1234567'
 ]
 
 ].forEach(([string, name, replacer, e, buffer]) => {
 
   test(`${string} | ${name}`, async t => {
-    t.is(replace(name)(string, replacer), e)
+    t.is(replace(name)(string, replacer, buffer), e)
   })
 })
