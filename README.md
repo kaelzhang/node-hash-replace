@@ -35,7 +35,8 @@ r('file.[hash:7].[chunkhash]', 'aGFzaC1yZXBsYWNl')
 // -> 'file.aGFzaC1.[chunkhash]'
 
 // example-2
-// If the second argument is null, then it will
+// If the second argument is null, then it will generate hash from the
+// value of the third argument
 r('file.[hash:7].js', null, '1234567')
 // -> 'file.fcea920.js'
 ```
