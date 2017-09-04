@@ -1,6 +1,6 @@
 {
   "name": "hash-replace",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Substitute a webpack-style hash template string. [hash:7]->abcdefg",
   "main": "lib/index.js",
   "scripts": {

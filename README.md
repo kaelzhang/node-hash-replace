@@ -27,24 +27,41 @@ $ npm install hash-replace --save
 
 ```js
 import replace from 'hash-replace'
-
 const r = replace('hash')
+
+// example-1
+// only replace [hash], but not [chunkhash]
 r('file.[hash:7].[chunkhash]', 'aGFzaC1yZXBsYWNl')
 // -> 'file.aGFzaC1.[chunkhash]'
-// only replace [hash], but not [chunkhash]
 
-r('file.[hash:7].js', null, '1234567') // -> 'file.fcea920.js'
+// example-2
+// If the second argument is null, then it will
+r('file.[hash:7].js', null, '1234567')
+// -> 'file.fcea920.js'
 ```
 
-## replace(hashName)(string, replacer, content)
+## replace(hashName)(template, replacer, content)
 
-- **hashName** `String` has following structure:
+- **hashName** `String`
+- **template** `String`
+  - **hashType** `String=md5` defaults to `'md5'`
+  - **hashName** `String` if the value of `template.hashName` and `hashName` not matches, the template will not be substituted.
+  - **digestType** `String=hex` defaults to `'hex'`
+  - **maxLength** `Number=Number.POSITIVE_INFINITY` maximum length of the hash. If unset, there will no limit.
+
+The `template` has the following structure:
 
 ```js
 '[hash]'
-'[hashName:length]'
+'[hashName:maxLength]'
 '[hashType:hashName:digestType]'
-'[hashType:hashName:digestType:length]'
+'[hashType:hashName:digestType:maxLength]'
+```
+
+And example-2 is equivalent to:
+
+```js
+r('file.[md5:hash:hex:7].js', null, '1234567')
 ```
 
 - **replacer** `String=|function(match, hashType, digestType, length)=`
